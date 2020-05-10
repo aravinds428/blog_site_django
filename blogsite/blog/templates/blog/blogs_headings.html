@@ -12,7 +12,7 @@
                     <div class="media-body" style="color:black;">
                         <h4 id="post_title"> {{ post.title }} </h4>
                         <h6> <span class="lg-col-10"> {{ post.author }}, <small><i> Posted on {{ post.date_posted }} </i></small> </h6>     
-                        <p>{{post.content}}</p>
+                        <p>{{post.content | safe }}</p>
                     </div>
                     <form class="form-inline" action="/viewpost" method="post">  
                         {% csrf_token %}  
