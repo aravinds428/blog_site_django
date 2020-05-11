@@ -1,5 +1,46 @@
 {% extends "blog/home_page.html" %}
-{% load crispy_forms_tags %}
+{% load static  %}
 {% block content %}
-    <h1> {{ user.username }} </h1>
+    <link rel="stylesheet" type="text/css" href="{% static 'users/style_users.css' %}">
+    
+    <h4> {{ user.username }} </h4>
+
+    <!--<div class="col-sm-3 col-md-6 col-lg-6" style="position:relative;left:400px;"> -->
+        <div style="position:relative;left:800px;">
+            {% if user.is_authenticated %}
+                <a href="{% url 'create-blog' %}" class="btn btn-info" role="button">Create Blog</a>
+            {% endif %}
+        </div>
+        <div>    
+            {% for post in posts %}
+                <div class="media border p-3" id="post_box">
+                    <div class="media-body" style="color:black;">
+                        <h4 id="post_title"> {{ post.title }} </h4>
+                        <h6> <span class="lg-col-10"> {{ post.author }}, <small><i> Posted on {{ post.date_posted }} </i></small> </h6>     
+                        <p>{{post.content | safe }}</p>
+                    </div>
+                </div>
+                    <form class="form-inline" name="Form1"  method="post">  
+                        {% csrf_token %}  
+                        <div class="invisible">    
+                            <input type="text" class="form-control" id="id_value" name="id_value" value="{{ post.id }}">
+                        </div>
+                        <div class="btn-group" style="position:relative;left:550px;top:-200px;">
+                            <button type="submit" class="btn btn-success" name="view_button" formaction="/viewpost">View</button>
+                            <button type="submit" class="btn btn-danger" name="delete_button" formaction="/deletepost/">Delete</button>
+                        </div>
+                    </form>
+                    <!--<form class="form-inline" action="#" method="post">  
+                        {% csrf_token %}  
+                        <div class="invisible">    
+                            <input type="text" class="form-control" id="id_value" name="id_value" value="{{ post.id }}">
+                        </div>
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>  -->
+                
+            {% endfor %}
+        </div>
+
+        
+
 {% endblock content %}
