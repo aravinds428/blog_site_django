@@ -17,7 +17,7 @@
                     <div class="media-body" style="color:black;">
                         <h4 id="post_title"> {{ post.title }} </h4>
                         <h6> <span class="lg-col-10"> {{ post.author }}, <small><i> Posted on {{ post.date_posted }} </i></small> </h6>     
-                        <p>{{post.content | safe }}</p>
+                        <p>{{post.content | truncatechars:100 | safe }}</p>
                     </div>
                 </div>
                     <form class="form-inline" name="Form1"  method="post">  
@@ -25,7 +25,7 @@
                         <div class="invisible">    
                             <input type="text" class="form-control" id="id_value" name="id_value" value="{{ post.id }}">
                         </div>
-                        <div class="btn-group" style="position:relative;left:550px;top:-200px;">
+                        <div class="btn-group" style="position:relative;left:550px;top:-100px;">
                             <button type="submit" class="btn btn-success" name="view_button" formaction="/viewpost">View</button>
                             <button type="submit" class="btn btn-danger" name="delete_button" formaction="/deletepost/">Delete</button>
                         </div>

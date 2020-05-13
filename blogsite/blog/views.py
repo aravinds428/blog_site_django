@@ -8,8 +8,6 @@ from . import models
 
 def home(request):
     posts = models.Post.objects.all().order_by('-date_posted')
-    for obj in posts:
-        obj.content = obj.content[:100]
     return render(request, 'blog/blogs_headings.html', {'posts': posts})
 
 
